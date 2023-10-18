@@ -62,15 +62,56 @@ const questions = [
              "GPS衛星からの送信周波数に２つの周波数を用いるのは電離層での電波伝搬遅延を補正するためである。",
               "送信信号は、粗測定信号（C/Aコード）と精密測定信号（Pコード）があり、いずれも暗号化されている。"],
           correctAnswer: 0 },
-          { question: "質問10: 笠井の誕生日について、正しいものを選べ",
-          choices: [
+
+    { question: "質問10: 笠井の誕生日について、正しいものを選べ",
+        choices: [
             "7月16日",
-             "12月12日",
-              "6月8日",
-               "4月21日"],
-           correctAnswer: 0 },
+            "12月12日",
+            "6月8日",
+            "4月21日"
+        ],
+        correctAnswer: 0
+    },
 ];
-let currentQuestion = 0; let score = 0; function displayQuestion() { if (currentQuestion < questions.length) { const questionElement = document.getElementById("question"); const choicesElement = document.getElementById("choices"); questionElement.textContent = questions[currentQuestion].question; choicesElement.innerHTML = ""; for (let i = 0; i < questions[currentQuestion].choices.length; i++) { const choiceButton = document.createElement("button"); choiceButton.textContent = questions[currentQuestion].choices[i]; choiceButton.className = "choice"; choiceButton.onclick = () => checkAnswer(i); choicesElement.appendChild(choiceButton); } } else { showResult(); } } function checkAnswer(choice) { const resultElement = document.getElementById("result"); if (choice === questions[currentQuestion].correctAnswer) { score++; resultElement.textContent = "正解"; } else { resultElement.textContent = "不正解"; } currentQuestion++;
-// ユーザーが正解か不正解を確認できる時間を設けるため、次の問題を表示する前に一時停止
-setTimeout(displayQuestion, 1000); // 2秒後に次の問題を表示
- } function showResult() { const resultElement = document.getElementById("result"); resultElement.textContent = `正解数: ${score} / ${questions.length}`; } displayQuestion();
+
+let currentQuestion = 0;
+let score = 0;
+
+function displayQuestion() {
+    if (currentQuestion < questions.length) {
+        const questionElement = document.getElementById("question");
+        const choicesElement = document.getElementById("choices");
+        questionElement.textContent = questions[currentQuestion].question;
+        choicesElement.innerHTML = "";
+        for (let i = 0; i < questions[currentQuestion].choices.length; i++) {
+            const choiceButton = document.createElement("button");
+            choiceButton.textContent = questions[currentQuestion].choices[i];
+            choiceButton.className = "choice";
+            choiceButton.onclick = () => checkAnswer(i);
+            choicesElement.appendChild(choiceButton);
+        }
+    } else {
+        showResult();
+    }
+}
+
+function checkAnswer(choice) {
+    const resultElement = document.getElementById("result");
+    if (choice === questions[currentQuestion].correctAnswer) {
+        score++;
+        resultElement.textContent = "正解";
+    } else {
+        // 不正解の場合、正解を表示
+        const correctAnswerText = questions[currentQuestion].choices[questions[currentQuestion].correctAnswer];
+        resultElement.textContent = `不正解。正解は: ${correctAnswerText}`;
+    }
+    currentQuestion++;
+    setTimeout(displayQuestion, 1000); // 1秒後に次の問題を表示
+}
+
+function showResult() {
+    const resultElement = document.getElementById("result");
+    resultElement.textContent = `正解数: ${score} / ${questions.length}`;
+}
+
+displayQuestion();
