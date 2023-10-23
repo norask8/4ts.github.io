@@ -8,3 +8,10 @@ body {
 #options button {
   margin: 10px;
 }
+
+/* 3問目以降の選択肢を大きくし、文字色を変更 */
+#options button:nth-child(n+7) {
+  font-size: 28px; /* 選択肢の文字サイズを大きくする */
+  padding: 10px 20px; /* ボタンの余白を調整する */
+  color: #FF5733; /* 文字色を変更（例：オレンジ色） */
+}
