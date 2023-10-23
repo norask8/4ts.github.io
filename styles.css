@@ -6,39 +6,37 @@ body {
 }
 
 h1 {
-  font-size: 36px; /* タイトルを大きくする */
+  font-size: 36px;
 }
 
 p {
-  font-size: 24px; /* テキストを大きくする */
+  font-size: 24px;
 }
 
 a {
-  display: inline-block; /* リンクをブロック要素に変更し、タップしやすくする */
-  padding: 10px 20px; /* リンクの余白を追加し、タップしやすくする */
-  background-color: #007BFF; /* リンクの背景色（例：青色） */
-  color: #fff; /* リンクの文字色を白にする */
-  text-decoration: none; /* アンダーラインを削除 */
-  border-radius: 5px; /* リンクの角を丸くする */
-  margin: 20px 0; /* 上下の余白を追加 */
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  margin: 20px 0;
 }
 
 a:hover {
-  background-color: #0056b3; /* マウスオーバー時の背景色（例：濃い青色） */
+  background-color: #0056b3;
 }
 
-@media (max-width: 480px) {
-  /* スマートフォン向けスタイル */
-  body {
-    font-size: 20px; /* フォントサイズをさらに小さくする */
-  }
-  h1 {
-    font-size: 28px; /* タイトルのフォントサイズを小さくする */
-  }
-  p {
-    font-size: 20px; /* テキストのフォントサイズを小さくする */
-  }
-  a {
-    font-size: 20px; /* リンクのフォントサイズを小さくする */
-  }
+/* 選択肢のスタイルを追加 */
+.choice {
+  font-size: 24px; /* 選択肢の文字サイズを大きくする */
+  margin: 10px 0; /* 選択肢の間隔を調整 */
+  padding: 10px; /* 選択肢の余白を追加 */
+  background-color: #009933; /* 選択肢の背景色（例：緑色） */
+  color: #fff; /* 選択肢の文字色を白にする */
+  border-radius: 5px; /* 選択肢の角を丸くする */
+}
+
+.choice:hover {
+  background-color: #007A29; /* マウスオーバー時の背景色（例：濃い緑色） */
 }
