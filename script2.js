@@ -32,6 +32,9 @@ const optionsContainer = document.getElementById("options");
 const correctCountText = document.getElementById("correct-count");
 const wrongQuestionsText = document.getElementById("wrong-questions");
 
+/* quiz.js */
+// ... 既存のコード ...
+
 function displayQuestion() {
   const question = questions[currentQuestionIndex];
   questionText.textContent = question.question;
@@ -42,8 +45,7 @@ function displayQuestion() {
     const input = document.createElement("input");
     input.type = "text";
     optionsContainer.appendChild(input);
-    
-    // 記述式の質問の場合、回答ボタンを表示
+
     const submitButton = document.createElement("button");
     submitButton.textContent = "回答する";
     submitButton.addEventListener("click", () => checkWrittenAnswer(input.value, question.answer));
@@ -53,10 +55,13 @@ function displayQuestion() {
       const button = document.createElement("button");
       button.textContent = option;
       button.addEventListener("click", () => checkOptionAnswer(index + 1, question.correctOption));
+      button.classList.add("choice"); // .choice クラスを追加
       optionsContainer.appendChild(button);
     });
   }
 }
+
+// ... 既存のコード ...
 
 function checkOptionAnswer(selectedOption, correctOption) {
   if (selectedOption === correctOption) {
