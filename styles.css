@@ -1,0 +1,44 @@
+/* index.css */
+body {
+  font-size: 24px;
+  max-width: 100%;
+  text-align: center;
+}
+
+h1 {
+  font-size: 36px; /* タイトルを大きくする */
+}
+
+p {
+  font-size: 24px; /* テキストを大きくする */
+}
+
+a {
+  display: inline-block; /* リンクをブロック要素に変更し、タップしやすくする */
+  padding: 10px 20px; /* リンクの余白を追加し、タップしやすくする */
+  background-color: #007BFF; /* リンクの背景色（例：青色） */
+  color: #fff; /* リンクの文字色を白にする */
+  text-decoration: none; /* アンダーラインを削除 */
+  border-radius: 5px; /* リンクの角を丸くする */
+  margin: 20px 0; /* 上下の余白を追加 */
+}
+
+a:hover {
+  background-color: #0056b3; /* マウスオーバー時の背景色（例：濃い青色） */
+}
+
+@media (max-width: 480px) {
+  /* スマートフォン向けスタイル */
+  body {
+    font-size: 20px; /* フォントサイズをさらに小さくする */
+  }
+  h1 {
+    font-size: 28px; /* タイトルのフォントサイズを小さくする */
+  }
+  p {
+    font-size: 20px; /* テキストのフォントサイズを小さくする */
+  }
+  a {
+    font-size: 20px; /* リンクのフォントサイズを小さくする */
+  }
+}
