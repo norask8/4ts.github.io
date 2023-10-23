@@ -1,17 +1,24 @@
-/* styles.css */
+/* quiz.css */
 body {
   font-size: 24px;
   max-width: 100%;
   text-align: center;
 }
 
-#options button {
-  margin: 10px;
+#question-container {
+  margin: 20px;
 }
 
-/* 3問目以降の選択肢を大きくし、文字色を変更 */
-#options button:nth-child(n+7) {
-  font-size: 28px; /* 選択肢の文字サイズを大きくする */
+/* 選択肢のスタイルを大きくし、色を変更 */
+#options button {
+  font-size: 24px; /* 選択肢の文字サイズを大きくする */
   padding: 10px 20px; /* ボタンの余白を調整する */
-  color: #FF5733; /* 文字色を変更（例：オレンジ色） */
+  background-color: #009933; /* 選択肢の背景色（例：緑色） */
+  color: #fff; /* 選択肢の文字色を白にする */
+  border-radius: 5px; /* 選択肢の角を丸くする */
+  margin: 10px; /* 選択肢の間隔を調整 */
+}
+
+#options button:hover {
+  background-color: #007A29; /* マウスオーバー時の背景色（例：濃い緑色） */
 }
