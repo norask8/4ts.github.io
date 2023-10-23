@@ -49,7 +49,7 @@ function checkAnswer(selectedOption, correctAnswer) {
   if (selectedOption === correctAnswer) {
     correctCount++;
   } else {
-    wrongQuestions.push(currentQuestionIndex + 1);
+    wrongQuestions.push({ questionIndex: currentQuestionIndex + 1, correctAnswer });
   }
 
   currentQuestionIndex++;
@@ -68,7 +68,7 @@ function checkWrittenAnswer(submittedAnswer, correctAnswers) {
   if (correct) {
     correctCount++;
   } else {
-    wrongQuestions.push(currentQuestionIndex + 1);
+    wrongQuestions.push({ questionIndex: currentQuestionIndex + 1, correctAnswer });
   }
 
   currentQuestionIndex++;
@@ -83,7 +83,19 @@ function endQuiz() {
   questionText.textContent = "クイズ終了";
   optionsContainer.innerHTML = "";
   correctCountText.textContent = correctCount;
-  wrongQuestionsText.textContent = wrongQuestions.join(", ");
+  
+  if (wrongQuestions.length > 0) {
+    const wrongQuestionsList = document.createElement("ul");
+    wrongQuestions.forEach(wrongQuestion => {
+      const listItem = document.createElement("li");
+      listItem.textContent = `問題 ${wrongQuestion.questionIndex}: 正解 - ${wrongQuestion.correctAnswer.join(', ')}`;
+      wrongQuestionsList.appendChild(listItem);
+    });
+    wrongQuestionsText.textContent = "間違えた問題:";
+    wrongQuestionsText.appendChild(wrongQuestionsList);
+  } else {
+    wrongQuestionsText.textContent = "間違えた問題はありません。";
+  }
 }
 
 displayQuestion();
