@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>クイズ</title>
-  <link rel="stylesheet" type="text/css" href="styles2.css">
-</head>
-<body>
-  <h1>クイズ</h1>
-  <div id="question-container">
-    <p id="question-text">質問がここに表示されます</p>
-    <div id="options">
-      <!-- オプションがここに表示されます -->
+  <head>
+    <link rel="stylesheet" type="text/css" href="styles2.css">
+  </head>
+  <body>
+    <div id="question-container">
+      <h1>クイズ</h1>
+      <p id="question-text"></p>
+      <div id="options"></div>
+      <p id="correct-count"></p>
+      <div id="wrong-questions">
+        <h2>間違えた問題:</h2>
+        <ul></ul>
+      </div>
+      <a href="index.html">ホームに戻る</a>
     </div>
-  </div>
-  <div id="result-container">
-    <p>正解数: <span id="correct-count">0</span></p>
-    <p>間違えた問題: <span id="wrong-questions">なし</span></p>
-    <a href = "index.html">ホームに戻る</a>
-  </div>
-  <script src="script2.js"></script>
-</body>
+    <script src="script2.js"></script>
+  </body>
 </html>
