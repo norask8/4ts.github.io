@@ -175,20 +175,23 @@ function checkWrittenAnswer(submittedAnswer, correctAnswers) {
 function endQuiz() {
   questionText.textContent = "クイズ終了";
   optionsContainer.innerHTML = "";
-  correctCountText.textContent = correctCount;
+  correctCountText.textContent = "正解数: " + correctCount;
+
+  const wrongQuestionsList = document.createElement("ul");
+  wrongQuestions.forEach(wrongQuestion => {
+    const listItem = document.createElement("li");
+    const question = questions[wrongQuestion.questionIndex - 1];
+    listItem.innerHTML = `<strong>問題:</strong> ${question.question}<br><strong>正解:</strong> ${question.options[wrongQuestion.correctOption - 1]}`;
+    wrongQuestionsList.appendChild(listItem);
+  });
   
-  if (wrongQuestions.length > 0) {
-    const wrongQuestionsList = document.createElement("ul");
-    wrongQuestions.forEach(wrongQuestion => {
-      const listItem = document.createElement("li");
-      listItem.textContent = `問題 ${wrongQuestion.questionIndex}: 正解 - ${wrongQuestion.correctOption || wrongQuestion.correctAnswer}`;
-      wrongQuestionsList.appendChild(listItem);
-    });
-    wrongQuestionsText.textContent = "間違えた問題:";
-    wrongQuestionsText.appendChild(wrongQuestionsList);
-  } else {
-    wrongQuestionsText.textContent = "間違えた問題はありません。";
-  }
+  wrongQuestionsText.textContent = "間違えた問題:";
+  wrongQuestionsText.appendChild(wrongQuestionsList);
+
+  const homeLink = document.createElement("a");
+  homeLink.href = "index.html";
+  homeLink.textContent = "ホームに戻る";
+  wrongQuestionsText.appendChild(homeLink);
 }
 
 displayQuestion();
