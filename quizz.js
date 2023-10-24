@@ -71,7 +71,7 @@ function checkWrittenAnswer(answer, correctAnswer) {
   } else {
     continuousCorrectCount = 0;
     const question = questions[currentQuestionIndex];
-    wrongQuestions.push({ questionIndex: currentQuestionIndex, correctOption: question.answer });
+    wrongQuestions.push({ questionIndex: currentQuestionIndex, questionText: question.question, correctOption: question.answer });
   }
 
   displayNextQuestion();
@@ -84,7 +84,7 @@ function checkOptionAnswer(selectedOption, correctOption) {
   } else {
     continuousCorrectCount = 0;
     const question = questions[currentQuestionIndex];
-    wrongQuestions.push({ questionIndex: currentQuestionIndex, correctOption: question.options[question.correctOption - 1] });
+    wrongQuestions.push({ questionIndex: currentQuestionIndex, questionText: question.question, correctOption: question.options[question.correctOption - 1] });
   }
 
   displayNextQuestion();
@@ -113,7 +113,7 @@ function endQuiz() {
     wrongQuestionsList.innerHTML = "";
     wrongQuestions.forEach((wrongQuestion) => {
       const listItem = document.createElement("li");
-      listItem.textContent = "問題 " + wrongQuestion.questionIndex + ": 正解 - " + wrongQuestion.correctOption;
+      listItem.textContent = "問題 " + wrongQuestion.questionIndex + ": " + wrongQuestion.questionText + " (正解: " + wrongQuestion.correctOption + ")";
       wrongQuestionsList.appendChild(listItem);
     });
   }
