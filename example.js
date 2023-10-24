@@ -2,25 +2,19 @@
 const questions = [
   {
     type: "written",
-    question: "日本の首都は？",
-    answer: "東京"
+    question: "笠井の下の名前は？（ひらがな）",
+    answer: "しゅんき"
   },
   {
     type: "options",
-    question: "次のうち、最も大きな惑星は？",
-    options: ["地球", "火星", "木星", "金星"],
-    correctOption: 3
+    question: "次のうち、笠井の誕生日は？",
+    options: ["7月16日", "6月28日", "12月3日", "1月26日"],
+    correctOption: 1
   },
   {
     type: "options",
-    question: "次の内、哺乳動物はどれ？",
-    options: ["カメ", "カモメ", "カブト虫", "カンガルー"],
-    correctOption: 4
-  },
-  {
-    type: "options",
-    question: "最初のプログラミング言語は？",
-    options: ["Python", "Java", "FORTRAN", "C"],
+    question: "次の内、笠井の出身地はどれ？",
+    options: ["西成", "寿町", "法華寺町", "横須賀"],
     correctOption: 3
   }
 ];
