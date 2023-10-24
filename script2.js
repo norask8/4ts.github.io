@@ -96,19 +96,42 @@ const questions = [
     correctOption: 1,
   },
   // 他のクイズの質問を追加
+    {
+    type: "written",
+    question: "日本の首都は？",
+    answer: "東京"
+  },
+  {
+    type: "options",
+    question: "次のうち、最も大きな惑星は？",
+    options: ["地球", "火星", "木星", "金星"],
+    correctOption: 3
+  },
+  {
+    type: "options",
+    question: "次の内、哺乳動物はどれ？",
+    options: ["カメ", "カモメ", "カブト虫", "カンガルー"],
+    correctOption: 4
+  },
+  {
+    type: "options",
+    question: "最初のプログラミング言語は？",
+    options: ["Python", "Java", "FORTRAN", "C"],
+    correctOption: 3
+  }
 ];
 
 let currentQuestionIndex = 0;
 let correctCount = 0;
-let wrongQuestions = [];
+const wrongQuestions = [];
 
 const questionText = document.getElementById("question-text");
 const optionsContainer = document.getElementById("options");
 const correctCountText = document.getElementById("correct-count");
+const continuousCorrectCountText = document.getElementById("continuous-correct-count");
 const wrongQuestionsText = document.getElementById("wrong-questions");
-
-/* quiz.js */
-// ... 既存のコード ...
+const wrongQuestionsList = document.createElement("ul");
+wrongQuestionsText.appendChild(wrongQuestionsList);
 
 function displayQuestion() {
   const question = questions[currentQuestionIndex];
@@ -125,45 +148,44 @@ function displayQuestion() {
     submitButton.textContent = "回答する";
     submitButton.addEventListener("click", () => checkWrittenAnswer(input.value, question.answer));
     optionsContainer.appendChild(submitButton);
-  } else if (question.options) {
+  } else if (question.type === "options") {
     question.options.forEach((option, index) => {
       const button = document.createElement("button");
       button.textContent = option;
       button.addEventListener("click", () => checkOptionAnswer(index + 1, question.correctOption));
-      button.classList.add("choice"); // .choice クラスを追加
+      button.classList.add("choice");
       optionsContainer.appendChild(button);
     });
   }
 }
 
-// ... 既存のコード ...
+function checkWrittenAnswer(answer, correctAnswer) {
+  if (answer.trim().toLowerCase() === correctAnswer.toLowerCase()) {
+    correctCount++;
+    continuousCorrectCount++;
+  } else {
+    continuousCorrectCount = 0;
+    const question = questions[currentQuestionIndex - 1];
+    wrongQuestions.push({ questionIndex: currentQuestionIndex, correctOption: question.answer });
+  }
+
+  displayNextQuestion();
+}
 
 function checkOptionAnswer(selectedOption, correctOption) {
   if (selectedOption === correctOption) {
     correctCount++;
+    continuousCorrectCount++;
   } else {
-    wrongQuestions.push({ questionIndex: currentQuestionIndex + 1, correctOption });
+    continuousCorrectCount = 0;
+    const question = questions[currentQuestionIndex - 1];
+    wrongQuestions.push({ questionIndex: currentQuestionIndex, correctOption: question.options[question.correctOption - 1] });
   }
 
-  currentQuestionIndex++;
-  if (currentQuestionIndex < questions.length) {
-    displayQuestion();
-  } else {
-    endQuiz();
-  }
+  displayNextQuestion();
 }
 
-function checkWrittenAnswer(submittedAnswer, correctAnswers) {
-  const submittedAnswers = submittedAnswer.split(', ').map(answer => answer.trim());
-
-  const correct = correctAnswers.every(correctAnswer => submittedAnswers.includes(correctAnswer));
-
-  if (correct) {
-    correctCount++;
-  } else {
-    wrongQuestions.push({ questionIndex: currentQuestionIndex + 1, correctAnswer: correctAnswers.join(', ') });
-  }
-
+function displayNextQuestion() {
   currentQuestionIndex++;
   if (currentQuestionIndex < questions.length) {
     displayQuestion();
@@ -177,17 +199,20 @@ function endQuiz() {
   optionsContainer.innerHTML = "";
   correctCountText.textContent = "正解数: " + correctCount;
 
-  const wrongQuestionsList = document.createElement("ul");
-  wrongQuestions.forEach(wrongQuestion => {
-    const listItem = document.createElement("li");
-    const question = questions[wrongQuestion.questionIndex - 1];
-    listItem.innerHTML = `<strong>問題:</strong> ${question.question}<br><strong>正解:</strong> ${question.options[wrongQuestion.correctOption - 1]}`;
-    wrongQuestionsList.appendChild(listItem);
-  });
-  
-  wrongQuestionsText.textContent = "間違えた問題:";
-  wrongQuestionsText.appendChild(wrongQuestionsList);
+  if (continuousCorrectCount > 1) {
+    continuousCorrectCountText.textContent = `${continuousCorrectCount}問連続正解`;
+  }
 
+  // 不正解した問題を表示
+  if (wrongQuestions.length > 0) {
+    wrongQuestionsText.style.display = "block";
+    wrongQuestionsList.innerHTML = wrongQuestions.map(wrongQuestion => {
+      const question = questions[wrongQuestion.questionIndex - 1];
+      return `<li>問題: ${question.question}<br>正解: ${wrongQuestion.correctOption}</li>`;
+    }).join("");
+  }
+
+  // ホームに戻るリンク
   const homeLink = document.createElement("a");
   homeLink.href = "index.html";
   homeLink.textContent = "ホームに戻る";
