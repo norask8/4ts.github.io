@@ -11,14 +11,33 @@ body {
 
 /* 選択肢のスタイルを大きくし、色を変更 */
 #options button {
-  font-size: 24px; /* 選択肢の文字サイズを大きくする */
-  padding: 10px 20px; /* ボタンの余白を調整する */
-  background-color: #009933; /* 選択肢の背景色（例：緑色） */
-  color: #fff; /* 選択肢の文字色を白にする */
-  border-radius: 5px; /* 選択肢の角を丸くする */
-  margin: 10px; /* 選択肢の間隔を調整 */
+  font-size: 24px;
+  padding: 10px 20px;
+  background-color: #009933;
+  color: #fff;
+  border-radius: 5px;
+  margin: 10px;
 }
 
 #options button:hover {
-  background-color: #007A29; /* マウスオーバー時の背景色（例：濃い緑色） */
+  background-color: #007A29;
+}
+
+/* リザルト画面のスタイル */
+#result-container {
+  background-color: #007BFF; /* リザルトの背景色（例：青色） */
+  color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+}
+
+#correct-count {
+  font-size: 28px; /* 正解数の文字サイズを大きくする */
+  margin: 10px;
+}
+
+#wrong-questions {
+  font-size: 20px; /* 間違えた問題の文字サイズを調整 */
+  margin: 20px;
 }
