@@ -6,25 +6,6 @@ const questions = [
     answer: "しゅんき"
   },
   {
-    type: "options",
-    question: "次のうち、最も大きな惑星は？",
-    options: ["地球", "火星", "木星", "金星"],
-    correctOption: 3
-  },
-  {
-    type: "options",
-    question: "次の内、哺乳動物はどれ？",
-    options: ["カメ", "カモメ", "カブト虫", "カンガルー"],
-    correctOption: 4
-  },
-  {
-    type: "options",
-    question: "最初のプログラミング言語は？",
-    options: ["Python", "Java", "FORTRAN", "C"],
-    correctOption: 3
-  },
-
-  {
     type: "written",
     question: "1問目の質問：タカン装置が航空機から地上タカン局までの何を受信するか、その要素を3つ挙げてください。（「～,～,～」という形で）",
     answer: "直視距離情報,方位情報,局識別音"
