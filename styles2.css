@@ -10,7 +10,7 @@ body {
 }
 
 /* 選択肢のスタイルを大きくし、色を変更 */
-#options button {
+.choice {
   font-size: 24px;
   padding: 10px 20px;
   background-color: #009933;
@@ -19,40 +19,52 @@ body {
   margin: 10px;
 }
 
-#options button:hover {
+.choice:hover {
   background-color: #007A29;
 }
 
 /* リザルト画面のスタイル */
-#result-container {
-  background-color: #007BFF;
-  color: #fff;
-  border-radius: 10px;
-  padding: 20px;
-  margin: 20px;
-  text-align: left; /* テキストを左寄せにする */
-}
-
 #correct-count {
   font-size: 28px;
+  margin: 10px;
+}
+
+#continuous-correct-count {
+  font-size: 24px;
   margin: 10px;
 }
 
 #wrong-questions {
   font-size: 20px;
   margin: 20px;
+  display: none; /* 初期状態では非表示 */
 }
 
 /* 不正解問題のスタイル */
 #wrong-questions ul {
-  list-style-type: none; /* リストマーカーを削除 */
+  list-style-type: none;
   padding: 0;
 }
 
 #wrong-questions li {
   margin: 15px 0;
   padding: 10px;
-  background-color: #ff3333; /* 不正解問題の背景色（例：赤色） */
+  background-color: #ff3333;
   color: #fff;
   border-radius: 5px;
+}
+
+/* ホームに戻るリンクのスタイル */
+a {
+  display: block;
+  margin-top: 20px;
+  text-decoration: none;
+  background-color: #007BFF;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+a:hover {
+  background-color: #0058CC;
 }
