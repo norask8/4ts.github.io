@@ -25,19 +25,34 @@ body {
 
 /* リザルト画面のスタイル */
 #result-container {
-  background-color: #007BFF; /* リザルトの背景色（例：青色） */
+  background-color: #007BFF;
   color: #fff;
   border-radius: 10px;
   padding: 20px;
   margin: 20px;
+  text-align: left; /* テキストを左寄せにする */
 }
 
 #correct-count {
-  font-size: 28px; /* 正解数の文字サイズを大きくする */
+  font-size: 28px;
   margin: 10px;
 }
 
 #wrong-questions {
-  font-size: 20px; /* 間違えた問題の文字サイズを調整 */
+  font-size: 20px;
   margin: 20px;
+}
+
+/* 不正解問題のスタイル */
+#wrong-questions ul {
+  list-style-type: none; /* リストマーカーを削除 */
+  padding: 0;
+}
+
+#wrong-questions li {
+  margin: 15px 0;
+  padding: 10px;
+  background-color: #ff3333; /* 不正解問題の背景色（例：赤色） */
+  color: #fff;
+  border-radius: 5px;
 }
