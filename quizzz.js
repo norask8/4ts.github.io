@@ -2,8 +2,8 @@
 const questions = [
   {
     type: "written",
-    question: "日本の首都は？",
-    answer: "東京"
+    question: "笠井の下の名前は？（ひらがな）",
+    answer: "しゅんき"
   },
   {
     type: "options",
