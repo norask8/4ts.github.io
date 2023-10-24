@@ -70,7 +70,7 @@ function checkWrittenAnswer(answer, correctAnswer) {
     continuousCorrectCount++;
   } else {
     continuousCorrectCount = 0;
-    const question = questions[currentQuestionIndex - 1];
+    const question = questions[currentQuestionIndex];
     wrongQuestions.push({ questionIndex: currentQuestionIndex, correctOption: question.answer });
   }
 
@@ -83,7 +83,7 @@ function checkOptionAnswer(selectedOption, correctOption) {
     continuousCorrectCount++;
   } else {
     continuousCorrectCount = 0;
-    const question = questions[currentQuestionIndex - 1];
+    const question = questions[currentQuestionIndex];
     wrongQuestions.push({ questionIndex: currentQuestionIndex, correctOption: question.options[question.correctOption - 1] });
   }
 
@@ -105,4 +105,18 @@ function endQuiz() {
   correctCountText.textContent = "正解数: " + correctCount;
 
   if (continuousCorrectCount > 1) {
-   
+    continuousCorrectCountText.textContent = continuousCorrectCount + "問連続正解";
+  }
+
+  if (wrongQuestions.length > 0) {
+    wrongQuestionsText.style.display = "block";
+    wrongQuestionsList.innerHTML = "";
+    wrongQuestions.forEach((wrongQuestion) => {
+      const listItem = document.createElement("li");
+      listItem.textContent = "問題 " + wrongQuestion.questionIndex + ": 正解 - " + wrongQuestion.correctOption;
+      wrongQuestionsList.appendChild(listItem);
+    });
+  }
+}
+
+displayQuestion();
