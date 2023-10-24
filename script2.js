@@ -166,6 +166,8 @@ function displayQuestion() {
   }
 }
 
+// ... 既存のコード ...
+
 function checkWrittenAnswer(answer, correctAnswer) {
   if (answer.trim().toLowerCase() === correctAnswer.toLowerCase()) {
     correctCount++;
@@ -176,8 +178,17 @@ function checkWrittenAnswer(answer, correctAnswer) {
     wrongQuestions.push({ questionIndex: currentQuestionIndex, correctOption: question.answer });
   }
 
-  displayNextQuestion();
+  currentQuestionIndex++;
+  if (currentQuestionIndex < questions.length) {
+    displayQuestion();
+  } else {
+    endQuiz();
+  }
 }
+
+// ... 既存のコード ...
+
+// ... 既存のコード ...
 
 function checkOptionAnswer(selectedOption, correctOption) {
   if (selectedOption === correctOption) {
@@ -186,11 +197,18 @@ function checkOptionAnswer(selectedOption, correctOption) {
   } else {
     continuousCorrectCount = 0;
     const question = questions[currentQuestionIndex - 1];
-    wrongQuestions.push({ questionIndex: currentQuestionIndex, correctOption: question.options[question.correctOption - 1] });
+    wrongQuestions.push({ questionIndex: currentQuestionIndex, correctOption: question.correctOption });
   }
 
-  displayNextQuestion();
+  currentQuestionIndex++;
+  if (currentQuestionIndex < questions.length) {
+    displayQuestion();
+  } else {
+    endQuiz();
+  }
 }
+
+// ... 既存のコード ...
 
 function displayNextQuestion() {
   currentQuestionIndex++;
