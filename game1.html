@@ -3,23 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>シューティングゲーム</title>
+    <title>ランニングゲーム</title>
     <link rel="stylesheet" type="text/css" href="game1.css">
 </head>
 <body>
     <div class="container">
-        <h1>シューティングゲーム</h1>
+        <h1>ランニングゲーム</h1>
         <div id="game-container">
-            <div id="player"></div>
-            <div id="enemy"></div>
+            <div class="runner"></div>
         </div>
-        <div class="score">得点: <span id="score">0</span></div>
-        <div class="timer">制限時間: <span id="time">30</span>秒</div>
-        <button id="restart" class="hidden">再プレイ</button>
-    </div>
-    <div id="result" class="hidden">
-        <h2>ゲーム終了</h2>
-        <p>得点: <span id="final-score">0</span></p>
+        <button id="start">ゲームスタート</button>
+        <div id="result" class="hidden">
+            <h2>ゲーム終了</h2>
+            <p>得点: <span id="score">0</span></p>
+        </div>
     </div>
     <script src="game1.js"></script>
 </body>
