@@ -1,82 +1,54 @@
-const player = document.getElementById('player');
-const enemy = document.getElementById('enemy');
-const scoreDisplay = document.getElementById('score');
-const timeDisplay = document.getElementById('time');
-const restartButton = document.getElementById('restart');
-const result = document.getElementById('result');
-const finalScore = document.getElementById('final-score');
+const runner = document.querySelector('.runner');
+const startButton = document.getElementById('start');
+const resultDiv = document.getElementById('result');
+const scoreSpan = document.getElementById('score');
 
+let isRunning = false;
 let score = 0;
-let time = 30; // 初期制限時間
+let timeLeft = 30; // 制限時間（秒）
 
-player.addEventListener('click', () => {
-    movePlayer();
-});
-
-enemyMove();
-
-function movePlayer() {
-    player.style.bottom = '150px';
-    player.style.width = '30px';
-    player.style.height = '30px';
-
-    setTimeout(() => {
-        player.style.bottom = '20px';
-        player.style.width = '50px';
-        player.style.height = '50px';
-        score++;
-        scoreDisplay.textContent = score;
-    }, 500);
-}
-
-function enemyMove() {
-    const maxX = document.getElementById('game-container').clientWidth - enemy.clientWidth;
-
-    let enemyX = maxX * Math.random();
-    enemy.style.left = enemyX + 'px';
-
-    setInterval(() => {
-        enemyX = maxX * Math.random();
-        enemy.style.left = enemyX + 'px';
-    }, 2000);
-}
-
-function updateTimeDisplay() {
-    timeDisplay.textContent = time;
-}
-
-function countdown() {
-    if (time > 0) {
-        time--;
-        updateTimeDisplay();
-    } else {
-        endGame();
+startButton.addEventListener('click', () => {
+    if (!isRunning) {
+        startGame();
     }
-}
-
-setInterval(countdown, 1000);
-
-function endGame() {
-    showResult();
-    clearInterval(countdown);
-}
-
-restartButton.addEventListener('click', () => {
-    result.style.display = 'none';
-    restartButton.style.display = 'none';
-    resetGame();
 });
 
-function resetGame() {
-    score = 0;
-    time = 30;
-    scoreDisplay.textContent = score;
-    updateTimeDisplay();
-    enemyMove();
+function startGame() {
+    isRunning = true;
+    startButton.disabled = true;
+    resultDiv.classList.add('hidden');
+
+    // プレイヤーの初期位置
+    let playerPosition = 0;
+    runner.style.left = playerPosition + 'px';
+
+    // タイマーを開始
+    const timer = setInterval(() => {
+        timeLeft--;
+        if (timeLeft <= 0) {
+            endGame(timer);
+        }
+    }, 1000);
+
+    // ゲームループ
+    const gameLoop = setInterval(() => {
+        playerPosition += 5; // プレイヤーの移動速度
+        runner.style.left = playerPosition + 'px';
+
+        // ゴールに到達したら得点を加算
+        if (playerPosition >= 300) {
+            score += 10;
+            scoreSpan.textContent = score;
+            playerPosition = 0;
+            runner.style.left = playerPosition + 'px';
+        }
+    }, 20);
 }
 
-function showResult() {
-    result.style.display = 'block';
-    finalScore.textContent = score;
-    restartButton.style.display = 'block';
+function endGame(timer) {
+    isRunning = false;
+    startButton.disabled = false;
+    clearInterval(timer);
+    clearInterval(gameLoop);
+    resultDiv.classList.remove('hidden');
 }
