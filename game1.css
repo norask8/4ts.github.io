@@ -1,79 +1,43 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     margin: 0;
-    padding: 0;
+    background-color: #87CEEB; /* 背景色（空、海、など） */
 }
 
 .container {
-    background-color: #111;
-    width: 100%;
-    padding: 20px;
-}
-
-h1 {
-    color: #fff;
-}
-
-#game-container {
-    width: 100%;
-    height: 500px;
-    background-color: #000;
-    position: relative;
-    overflow: hidden;
-}
-
-#player, #enemy {
-    width: 50px;
-    height: 50px;
-    background-color: #007BFF;
-    position: absolute;
-    bottom: 20px;
-    transition: all 0.3s;
-}
-
-#player {
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-#enemy {
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.score {
-    color: #fff;
-    font-size: 20px;
-    margin-top: 20px;
-}
-
-.timer {
-    color: #fff;
-    font-size: 20px;
-    margin-top: 10px;
-}
-
-#result {
-    display: none;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.8);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     text-align: center;
+    background-color: #fff;
     padding: 20px;
-    z-index: 2;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-#restart {
-    display: none;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
+.runner {
+    width: 20px;
+    height: 80px;
+    background-color: #000; /* ランナーの体の色 */
+    position: relative;
+    animation: run 0.5s infinite linear;
+}
+
+.runner::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background-color: #FF0000; /* ランナーの頭の色 */
+    position: absolute;
+    top: -20px;
+    border-radius: 50%;
+}
+
+@keyframes run {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(100%);
+    }
 }
