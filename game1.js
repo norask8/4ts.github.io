@@ -1,54 +1,66 @@
-const runner = document.querySelector('.runner');
-const startButton = document.getElementById('start');
-const resultDiv = document.getElementById('result');
+const clickButton = document.getElementById('clickButton');
 const scoreSpan = document.getElementById('score');
+const timeSpan = document.getElementById('time');
+const modeSelect = document.getElementById('modeSelect');
 
-let isRunning = false;
 let score = 0;
 let timeLeft = 30; // 制限時間（秒）
+let maxClicks = 50; // 目標のクリック回数
+let clicks = 0;
 
-startButton.addEventListener('click', () => {
-    if (!isRunning) {
-        startGame();
+modeSelect.addEventListener('change', () => {
+    const selectedMode = modeSelect.value;
+    switch (selectedMode) {
+        case 'easy':
+            maxClicks = 30;
+            timeLeft = 45;
+            break;
+        case 'normal':
+            maxClicks = 50;
+            timeLeft = 30;
+            break;
+        case 'hard':
+            maxClicks = 70;
+            timeLeft = 20;
+            break;
+    }
+    clicks = 0;
+    score = 0;
+    updateUI();
+    clearInterval(gameInterval);
+    gameInterval = setInterval(updateGame, 1000);
+});
+
+const updateUI = () => {
+    scoreSpan.textContent = score;
+    timeSpan.textContent = timeLeft;
+}
+
+const gameOver = () => {
+    clickButton.disabled = true;
+    clickButton.textContent = "ゲームオーバー";
+    clickButton.style.backgroundColor = "#e74c3c";
+}
+
+const checkGameEnd = () => {
+    if (clicks >= maxClicks || timeLeft <= 0) {
+        gameOver();
+    }
+}
+
+clickButton.addEventListener('click', () => {
+    if (timeLeft > 0) {
+        score++;
+        clicks++;
+        updateUI();
+        checkGameEnd();
     }
 });
 
-function startGame() {
-    isRunning = true;
-    startButton.disabled = true;
-    resultDiv.classList.add('hidden');
-
-    // プレイヤーの初期位置
-    let playerPosition = 0;
-    runner.style.left = playerPosition + 'px';
-
-    // タイマーを開始
-    const timer = setInterval(() => {
-        timeLeft--;
-        if (timeLeft <= 0) {
-            endGame(timer);
-        }
-    }, 1000);
-
-    // ゲームループ
-    const gameLoop = setInterval(() => {
-        playerPosition += 5; // プレイヤーの移動速度
-        runner.style.left = playerPosition + 'px';
-
-        // ゴールに到達したら得点を加算
-        if (playerPosition >= 300) {
-            score += 10;
-            scoreSpan.textContent = score;
-            playerPosition = 0;
-            runner.style.left = playerPosition + 'px';
-        }
-    }, 20);
+const updateGame = () => {
+    timeLeft--;
+    updateUI();
+    checkGameEnd();
 }
 
-function endGame(timer) {
-    isRunning = false;
-    startButton.disabled = false;
-    clearInterval(timer);
-    clearInterval(gameLoop);
-    resultDiv.classList.remove('hidden');
-}
+let gameInterval = setInterval(updateGame, 1000);
