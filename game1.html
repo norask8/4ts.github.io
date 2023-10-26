@@ -8,16 +8,26 @@
 </head>
 <body>
     <div class="container">
-        <h1>クリッカーゲーム</h1>
-        <p>得点: <span id="score">0</span></p>
-        <p>制限時間: <span id="time">30</span>秒</p>
-        <label for="modeSelect">難易度:</label>
-        <select id="modeSelect">
-            <option value="easy">Easy</option>
-            <option value="normal">Normal</option>
-            <option value="hard">Hard</option>
-        </select>
-        <button id="clickButton">クリック！</button>
+        <div id="start-screen">
+            <h1>クリッカーゲーム</h1>
+            <label for="modeSelect">難易度:</label>
+            <select id="modeSelect">
+                <option value="easy">Easy</option>
+                <option value="normal">Normal</option>
+                <option value="hard">Hard</option>
+            </select>
+            <button id="startButton">スタート</button>
+        </div>
+        <div id="game-screen">
+            <p>得点: <span id="score">0</span></p>
+            <p>制限時間: <span id="time">30</span>秒</p>
+            <button id="clickButton">クリック！</button>
+        </div>
+        <div id="result-screen" class="hidden">
+            <h2>ゲーム終了</h2>
+            <p>得点: <span id="finalScore">0</span></p>
+            <button id="restartButton">もう一度プレイ</button>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
