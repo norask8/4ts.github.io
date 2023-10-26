@@ -1,14 +1,21 @@
+const startScreen = document.getElementById('start-screen');
+const gameScreen = document.getElementById('game-screen');
+const resultScreen = document.getElementById('result-screen');
+const startButton = document.getElementById('startButton');
+const restartButton = document.getElementById('restartButton');
+
 const clickButton = document.getElementById('clickButton');
 const scoreSpan = document.getElementById('score');
+const finalScoreSpan = document.getElementById('finalScore');
 const timeSpan = document.getElementById('time');
 const modeSelect = document.getElementById('modeSelect');
 
 let score = 0;
-let timeLeft = 30; // 制限時間（秒）
-let maxClicks = 50; // 目標のクリック回数
+let timeLeft = 30;
+let maxClicks = 50;
 let clicks = 0;
 
-modeSelect.addEventListener('change', () => {
+startButton.addEventListener('click', () => {
     const selectedMode = modeSelect.value;
     switch (selectedMode) {
         case 'easy':
@@ -27,9 +34,32 @@ modeSelect.addEventListener('change', () => {
     clicks = 0;
     score = 0;
     updateUI();
-    clearInterval(gameInterval);
+    showGameScreen();
     gameInterval = setInterval(updateGame, 1000);
 });
+
+restartButton.addEventListener('click', () => {
+    showStartScreen();
+});
+
+const showStartScreen = () => {
+    startScreen.style.display = 'block';
+    gameScreen.style.display = 'none';
+    resultScreen.style.display = 'none';
+}
+
+const showGameScreen = () => {
+    startScreen.style.display = 'none';
+    gameScreen.style.display = 'block';
+    resultScreen.style.display = 'none';
+}
+
+const showResultScreen = () => {
+    startScreen.style.display = 'none';
+    gameScreen.style.display = 'none';
+    resultScreen.style.display = 'block';
+    finalScoreSpan.textContent = score;
+}
 
 const updateUI = () => {
     scoreSpan.textContent = score;
@@ -38,8 +68,8 @@ const updateUI = () => {
 
 const gameOver = () => {
     clickButton.disabled = true;
-    clickButton.textContent = "ゲームオーバー";
-    clickButton.style.backgroundColor = "#e74c3c";
+    clearInterval(gameInterval);
+    showResultScreen();
 }
 
 const checkGameEnd = () => {
@@ -63,4 +93,5 @@ const updateGame = () => {
     checkGameEnd();
 }
 
-let gameInterval = setInterval(updateGame, 1000);
+let gameInterval;
+showStartScreen();
